@@ -53,7 +53,7 @@ describe SecurityGuard::Deduplication do
   it 'dedupes an array with another array' do
     dedupe.send(:_deduped,
       ['a@example.com', 'b@example.com', 'c@example.com', 'c@example.com'],
-      ['b@example.com', 'd@example.com'],
+      ['b@example.com', 'd@example.com']
     ).must_equal ['a@example.com', 'c@example.com']
   end
 
