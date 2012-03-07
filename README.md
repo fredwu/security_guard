@@ -1,4 +1,4 @@
-# SecurityGuard
+# SecurityGuard [![Build Status](https://secure.travis-ci.org/fredwu/security_guard.png?branch=master)](http://travis-ci.org/fredwu/security_guard) [![Dependency Status](https://gemnasium.com/fredwu/security_guard.png)](https://gemnasium.com/fredwu/security_guard)
 
 This gem is a collection of useful tools for auditing data and performing security checks.
 

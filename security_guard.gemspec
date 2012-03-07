@@ -3,10 +3,10 @@ require File.expand_path('../lib/security_guard/version', __FILE__)
 
 Gem::Specification.new do |gem|
   gem.authors       = ['Fred Wu']
-  gem.email         = ['fred.wu@sitepoint.com']
+  gem.email         = ['ifredwu@gmail.com']
   gem.summary       = %q{A collection of useful tools for auditing data and performing security checks.}
   gem.description   = gem.summary
-  gem.homepage      = 'https://github.com/sitepoint/security_guard'
+  gem.homepage      = 'https://github.com/fredwu/security_guard'
 
   gem.executables   = `git ls-files -- bin/*`.split("\n").map{ |f| File.basename(f) }
   gem.files         = `git ls-files`.split("\n")
