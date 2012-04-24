@@ -48,11 +48,10 @@ country_ips = SecurityGuard::CountryIps.new(
 Returns a list of the IPs from given country and IP dictionaries. Useful for auditing IPs from higher risk nations.
 
 ```ruby
-country_ips = SecurityGuard::CountryIps.new(
+SecurityGuard::CountryIps.new(
   :countries => ['Australia'],
   :ips       => ['4.4.4.4', '8.8.8.8', '203.206.0.1']
-)
-country_ips.result # => ['203.206.0.1']
+).result # => ['203.206.0.1']
 ```
 
 You may also pass country and IP data as a line-delimited file by appending `_from_file` at the end of the attributes:

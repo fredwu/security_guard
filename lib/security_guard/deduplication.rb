@@ -1,45 +1,21 @@
 module SecurityGuard
   class Deduplication
     include Concerns::Initializable
+    include Concerns::InputToOutput
 
     initializable :input_folder, :output_folder
-    attr_accessor :source_data, :deduped_data, :filenames
-
-    def initialize(args = nil)
-      @source_data  ||= []
-      @deduped_data ||= []
-      @filenames    ||= []
-      initializable_attrs args
-    end
 
     def process
-      read_data_from input_folder
-      dedupe source_data
-      write_data_to output_folder
+      input_to_output :input   => input_folder,
+                      :output  => output_folder,
+                      :process => :dedupe
     end
 
     private
 
-    def read_data_from(folder)
-      files = Dir["#{folder}/*"].sort
-
-      raise Exception.new('Input folder is invalid or is empty.') if files.empty?
-
-      files.each do |file|
-        filenames   << File.basename(file)
-        source_data << File.readlines(file).map{ |line| line.downcase.strip }
-      end
-    end
-
-    def write_data_to(folder)
-      deduped_data.each_with_index do |array, index|
-        File.open("#{folder}/#{filenames[index]}", 'w') do |f|
-          f.puts array
-        end
-      end
-    end
-
     def dedupe(data)
+      deduped_data = []
+
       # start from the lowest array (in terms of dedupe priority)
       data.reverse!
       data_original = data.clone
@@ -47,9 +23,10 @@ module SecurityGuard
         data.shift
         deduped_data << _deduped_multi(array, data)
       end
+
       # the top array doesn't need to be compared, just needs to be unique
       deduped_data.last.uniq!
-      deduped_data.reverse!
+      deduped_data.reverse
     end
 
     def _deduped_multi(target, others)
