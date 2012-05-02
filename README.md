@@ -72,6 +72,17 @@ SecurityGuard::Deduplication.new(
 ).process
 ```
 
+### Sequences
+
+Prepends line-delimited content with a comma-delimited sequence column (1, 2, 3...) for counting.
+
+```ruby
+SecurityGuard::Sequences.new(
+  :input_folder  => '/path/to/the/input/folder',
+  :output_folder => '/path/to/the/output/folder'
+).process
+```
+
 ## Changelog
 
 ### v0.0.6 [2012-03-07]

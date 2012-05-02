@@ -39,6 +39,20 @@ module SecurityGuard
     end
   end
 
+  class SequencesCommand < Clamp::Command
+    parameter 'input_folder', 'folder containing the input files'
+    parameter 'output_folder', 'folder for outputing deduped files'
+
+    def execute
+      SecurityGuard::Sequences.new(
+        :input_folder  => input_folder,
+        :output_folder => output_folder
+      ).process
+
+      ap "Sequences results published to '#{output_folder}'."
+    end
+  end
+
   class MainCommand < Clamp::Command
     def self.output_result(result, output_path)
       `echo #{result} > #{output_path}`
@@ -52,6 +66,10 @@ module SecurityGuard
     subcommand 'deduplication',
                'Deduplicates content contained within a list of files.',
                SecurityGuard::DeduplicationCommand
+
+    subcommand 'sequences',
+               'Prepends line-delimited content with a sequence column (1, 2, 3...) for counting.',
+               SecurityGuard::SequencesCommand
   end
 end
 
